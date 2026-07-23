@@ -26,6 +26,7 @@
     background:var(--bg);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
   }
   h1,h2,h3{font-family:'Manrope',sans-serif;}
   img{display:block;max-width:100%;height:auto;}
@@ -184,7 +185,10 @@
     .categories__grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:860px){
-    .navbar__inner{padding: 20px;}
+    .navbar__inner{
+      margin: 16px auto 0;
+      padding: 12px 18px;
+    }
     .navbar__links{
       position:absolute;top:100%;left:20px;right:20px;
       background:rgba(255,255,255,.98);
@@ -202,12 +206,40 @@
     .navbar__links a::after{display:none;}
     .navbar__toggle{display:flex;}
 
-    .hero{min-height:78vh;}
-    .categories{padding:80px 0 90px;}
-    .categories__grid{grid-template-columns:1fr;gap:20px;padding:0 20px;}
+    .hero{
+      min-height:auto;
+      background-position:center center;
+      padding-bottom:20px;
+    }
+    .hero__inner{
+      margin: 70px auto 0;
+      padding: 0 20px;
+    }
+    .hero h1{
+      font-size:clamp(28px, 9.2vw, 40px);
+      margin-bottom:12px;
+      max-width:100%;
+    }
+    .hero h2{
+      font-size:clamp(15px, 4.8vw, 18px);
+      max-width:100%;
+    }
+    .categories{
+      position:relative;
+      bottom:auto;
+      margin-top:24px;
+      padding:0 0 8px;
+    }
+    .categories__grid{grid-template-columns:1fr;gap:14px;padding:0 20px; margin:0 auto;}
+    .card{padding:18px 16px;min-height:0;border-radius:18px;}
+    .card h4{font-size:16px;}
+    .card__icon{width:42px;height:42px;}
   }
   @media (max-width:480px){
-    .hero{min-height:auto;padding-bottom:60px;}
+    .hero{padding-bottom:16px;}
+    .hero__inner{margin-top:58px;}
+    .navbar__inner{margin-top:12px;}
+    .card__link{font-size:13px;}
   }
 </style>
 </head>
