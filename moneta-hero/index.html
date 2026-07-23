@@ -41,12 +41,17 @@
   }
   .navbar__inner{
     max-width: var(--wrap);
-    margin: 0 auto;
-    padding: 24px 32px;
+    margin: 20px auto 0;
+    padding: 12px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(32, 31, 38, 0.08);
   }
   .navbar__logo img{height:30px;width:auto;}
   .navbar__links{display:flex;align-items:center;gap:40px;list-style:none;}
@@ -81,7 +86,7 @@
   .hero__inner{
     width:100%;
     max-width:var(--wrap);
-    margin: auto auto;
+    margin: 90px auto auto;
     padding: 0 32px;
   }
   .hero h1{
@@ -106,18 +111,17 @@
 
   /* ---------- CATEGORIES ---------- */
   .categories{
-    position:relative;
-    padding:110px 0 120px;
-    overflow:hidden;
-    background:
-      radial-gradient(480px 380px at 8% 15%, var(--pink-wash), transparent 70%),
-      radial-gradient(560px 420px at 95% 85%, var(--pink-wash), transparent 70%),
-      var(--bg);
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:28px;
+    padding:0;
+    overflow:visible;
+    z-index:5;
+    background:transparent;
   }
   .categories__head{
-    text-align:center;
-    max-width:640px;
-    margin:0 auto 56px;
+    display:none;
   }
   .categories__eyebrow{
     display:inline-block;
@@ -131,22 +135,24 @@
   }
   .categories__grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
+    grid-template-columns:repeat(6, minmax(0, 1fr));
+    gap:24px;
     max-width:var(--wrap);
     margin:0 auto;
     padding:0 32px;
+    align-items:stretch;
   }
   .card{
     display:flex;flex-direction:column;align-items:flex-start;gap:16px;
-    padding:34px 28px;
-    border-radius:var(--radius);
-    background:rgba(255,255,255,.45);
-    backdrop-filter:blur(20px) saturate(140%);
-    -webkit-backdrop-filter:blur(20px) saturate(140%);
-    border:1px solid var(--pink-soft);
-    box-shadow:0 10px 30px rgba(32,31,38,.05);
+    padding:22px 20px;
+    border-radius:22px;
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    border:1px solid rgba(255,255,255,.45);
+    box-shadow:0 8px 24px rgba(32,31,38,.08);
     transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+    min-height:150px;
   }
   .card:hover{
     transform:translateY(-6px);
@@ -154,7 +160,7 @@
     box-shadow:0 20px 40px rgba(236,23,82,.14);
   }
   .card__icon{
-    width:52px;height:52px;
+    width:46px;height:46px;
     display:flex;align-items:center;justify-content:center;
     border-radius:14px;
     background:rgba(236,23,82,.1);
@@ -162,7 +168,7 @@
   .card__icon svg{width:26px;height:26px;stroke:var(--pink);}
   .card h4{
     font-family:'Manrope',sans-serif;
-    font-size:19px;font-weight:700;color:var(--ink);
+    font-size:17px;font-weight:700;color:var(--ink);
   }
   .card__link{
     margin-top:auto;padding-top:8px;
@@ -171,6 +177,9 @@
   }
 
   /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1200px){
+    .categories__grid{grid-template-columns:repeat(3,1fr);}
+  }
   @media (max-width:1024px){
     .categories__grid{grid-template-columns:repeat(2,1fr);}
   }
@@ -224,21 +233,20 @@
       <h1>Решение за подобар чекор, помал замор и поголема удобност во секојдневниот живот.</h1>
       <h2>Отстранете ја болката и заморот од стапалата</h2>
     </div>
-  </section>
 
-  <section class="categories">
-    <div class="categories__head">
-      <span class="categories__eyebrow">MONETA вложки</span>
-      <h3>Изберете ја вашата категорија</h3>
-    </div>
+    <div class="categories">
+      <div class="categories__head">
+        <span class="categories__eyebrow">MONETA вложки</span>
+        <h3>Изберете ја вашата категорија</h3>
+      </div>
 
-    <div class="categories__grid">
+      <div class="categories__grid">
 
       <a href="#" class="card">
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c1-4 3-6 6-6h2c2 0 3-1.2 3.5-3 .3-1 1-1.5 2-1.3 1 .2 1.5 1.1 1.2 2.1-.3 1-.2 1.7.6 2.2 1.6 1 3.2 2.6 3.7 5H3Z"/><path d="M3 17h18v2a2 2 0 0 1-2 2H6a3 3 0 0 1-3-3v-1Z"/></svg>
         </div>
-        <h4>Спортски вложки</h4>
+        <h4>Спортски влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
@@ -246,7 +254,7 @@
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V9c0-1.7 1.3-3 3-3h2l2-2 2 2h2c1.7 0 3 1.3 3 3v11"/><path d="M4 20h16"/><path d="M8 13h8"/><path d="M8 16.5h8"/></svg>
         </div>
-        <h4>Кожни вложки</h4>
+        <h4>Кожни влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
@@ -254,7 +262,7 @@
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"/></svg>
         </div>
-        <h4>Летни вложки</h4>
+        <h4>Летни влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
@@ -262,7 +270,7 @@
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M12 3l-2 2m2-2 2 2M12 21l-2-2m2 2 2-2M4.2 7.5l2.6-.4m-2.6.4-.7-2.5M19.8 16.5l-2.6.4m2.6-.4.7 2.5M4.2 16.5l2.6.4m-2.6-.4-.7 2.5M19.8 7.5l-2.6-.4m2.6.4.7-2.5"/></svg>
         </div>
-        <h4>Зимски вложки</h4>
+        <h4>Зимски влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
@@ -270,7 +278,7 @@
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 3 5 6.2 5 9.4A5 5 0 0 1 7 11.4C7 8.2 9 5 12 2Z"/><path d="M12 13v9M9 22h6"/></svg>
         </div>
-        <h4>HUNTER вложки</h4>
+        <h4>HUNTER влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
@@ -278,7 +286,7 @@
         <div class="card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.2 4.6 5 .7-3.6 3.6.9 5.1L12 14.6l-4.5 2.4.9-5-3.6-3.7 5-.7L12 3Z"/></svg>
         </div>
-        <h4>Детски вложки</h4>
+        <h4>Детски влошки</h4>
         <span class="card__link">Погледни →</span>
       </a>
 
