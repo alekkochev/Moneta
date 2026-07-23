@@ -29,6 +29,60 @@ document.addEventListener('click', (e) => {
 });
 
 // ========================================
+// GSAP INIT
+// ========================================
+if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.hero__inner', {
+        opacity: 0,
+        y: 40,
+        duration: 1.1,
+        ease: 'power3.out',
+        delay: 0.2
+    });
+
+    gsap.from('.hero__trust-item', {
+        opacity: 0,
+        y: 20,
+        stagger: 0.12,
+        duration: 0.8,
+        delay: 0.6,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero__cta', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.9,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.navbar__links a', {
+        opacity: 0,
+        y: -10,
+        stagger: 0.08,
+        duration: 0.7,
+        ease: 'power3.out',
+        delay: 0.3
+    });
+
+    gsap.from('.categories__grid .card', {
+        scrollTrigger: {
+            trigger: '.categories__grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+        },
+        opacity: 0,
+        y: 40,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out'
+    });
+}
+
+// ========================================
 // CONSOLE WELCOME
 // ========================================
 console.log('%c MONETA Macedonia 🦶 ', 'background:#EC1752;color:#fff;font-size:20px;font-weight:bold;padding:10px 20px;border-radius:8px;');
