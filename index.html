@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="mk">
 <head>
 <meta charset="UTF-8">
@@ -33,7 +33,6 @@
   a{text-decoration:none;color:inherit;}
   .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px;}
 
-  /* ---------- NAVBAR (Normal flow on first screen, scrolls away) ---------- */
   .navbar{
     width: 100%;
     background: transparent;
@@ -73,7 +72,6 @@
   }
   .navbar__toggle span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
 
-  /* ---------- HERO ---------- */
   .hero{
     position:relative;
     min-height:88vh;
@@ -111,7 +109,6 @@
     .hero h2{white-space:nowrap;}
   }
 
-  /* ---------- CATEGORIES ---------- */
   .categories{
     position:absolute;
     left:0;
@@ -138,7 +135,7 @@
   .categories__grid{
     display:grid;
     grid-template-columns:repeat(6, minmax(0, 1fr));
-    gap:24px;
+    gap:28px;
     max-width:var(--wrap);
     margin:0 auto;
     padding:0 32px;
@@ -178,7 +175,6 @@
     display:flex;align-items:center;gap:6px;
   }
 
-  /* ---------- RESPONSIVE ---------- */
   @media (max-width:1200px){
     .categories__grid{grid-template-columns:repeat(3,1fr);}
   }
@@ -193,27 +189,74 @@
     .hero__inner{margin: 64px auto 0;}
   }
   @media (max-width:860px){
+    .hero{
+      background-size: 150% auto;
+      background-position: center top;
+    }
     .navbar__inner{
       margin: 16px auto 0;
       padding: 12px 18px;
+      position:relative;
     }
     .navbar__links{
-      position:absolute;top:100%;left:20px;right:20px;
-      background:rgba(255,255,255,.98);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      flex-direction:column;align-items:flex-start;gap:0;
-      max-height:0;overflow:hidden;
-      transition:max-height .3s ease, padding .3s ease;
-      border:1px solid rgba(0,0,0,.06);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(32,31,38,0.12);
+      position:absolute;
+      top:calc(100% + 10px);
+      left:auto;
+      right:0;
+      width:min(100%, 320px);
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:0 14px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      pointer-events:none;
+      transition:max-height .3s ease, opacity .25s ease, padding .3s ease, transform .25s ease;
+      transform:translateY(-6px);
+      background:#9A9A9A;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.34);
+      border-radius:20px;
+      box-shadow:0 20px 40px rgba(32,31,38,.12);
+      z-index:25;
+      isolation:isolate;
     }
-    .navbar__links.is-open{max-height:320px; padding: 12px 0;}
-    .navbar__links a{width:100%;padding:16px 24px;}
+    .navbar__links::before{
+      content:'m';
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      font-family:'Manrope',sans-serif;
+      font-size:clamp(76px, 20vw, 120px);
+      font-weight:800;
+      line-height:1;
+      letter-spacing:-.08em;
+      color:rgba(236,23,82,.10);
+      pointer-events:none;
+      z-index:-1;
+    }
+    .navbar__links.is-open{
+      max-height:320px;
+      padding:18px 14px;
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+    .navbar__links a{
+      width:100%;
+      max-width:280px;
+      padding:12px 20px;
+      text-align:center;
+      font-size:16px;
+      border-radius:14px;
+    }
     .navbar__links a::after{display:none;}
-    .navbar__toggle{display:flex;}
-
+    .navbar__links a:hover{background:rgba(255,255,255,.30);}
+    .navbar__toggle{display:flex;position:relative;z-index:21;}
     .hero{
       min-height:auto;
       background-size:cover;
@@ -233,15 +276,15 @@
       font-size:clamp(15px, 4.8vw, 18px);
       max-width:100%;
     }
-    .categories__grid{grid-template-columns:repeat(2,1fr);gap:14px;padding:0 20px; margin:0 auto;}
+    .categories__grid{grid-template-columns:repeat(2,1fr);gap:18px;padding:0 20px; margin:0 auto;}
     .card{padding:18px 16px;min-height:0;border-radius:18px;}
     .card h4{font-size:16px;}
     .card__icon{width:42px;height:42px;}
   }
   @media (max-width:560px){
     .hero{
-      background-size:cover;
-      background-position:62% center;
+      background-size: 190% auto;
+      background-position: 62% top;
     }
     .categories__grid{grid-template-columns:1fr;}
   }
@@ -249,6 +292,7 @@
     .hero{padding-bottom:16px;}
     .hero__inner{margin-top:58px;}
     .navbar__inner{margin-top:12px;}
+    .hero h1{font-size:clamp(24px, 8vw, 32px);}
     .card__link{font-size:13px;}
   }
 </style>
@@ -273,7 +317,6 @@
 
     <div class="hero__inner">
       <h1>Решение за подобар чекор, помал замор и поголема удобност во секојдневниот живот.</h1>
-      
     </div>
 
     <div class="categories">
@@ -338,9 +381,17 @@
   <script>
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
+
     toggle.addEventListener('click', () => {
       const isOpen = links.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    links.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   </script>
 </body>
