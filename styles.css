@@ -1,0 +1,770 @@
+/* ========================================
+   ROOT VARIABLES
+   ======================================== */
+:root {
+    --pink: #EC1752;
+    --pink-soft: rgba(236, 23, 82, 0.35);
+    --pink-wash: rgba(236, 23, 82, 0.08);
+    --ink: #201F26;
+    --muted: #6B6B76;
+    --bg: #F7F6F5;
+    --white: #FFFFFF;
+    --radius: 20px;
+    --wrap: 1240px;
+    --shadow: 0 8px 24px rgba(32, 31, 38, 0.08);
+    --shadow-hover: 0 20px 40px rgba(236, 23, 82, 0.14);
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+    animation: fadeInPage 0.8s ease forwards;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Manrope', sans-serif;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========================================
+   NAVBAR
+   ======================================== */
+.navbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 24px 20px 0;
+}
+
+.navbar__inner {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    position: relative;
+}
+
+.navbar__logo img {
+    height: 34px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+}
+
+.navbar__links a {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding: 6px 0;
+    line-height: 1.4;
+    transition: color var(--transition);
+}
+
+.navbar__links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--pink);
+    transition: width var(--transition);
+}
+
+.navbar__links a:hover {
+    color: var(--pink);
+}
+
+.navbar__links a:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   BURGER MENI
+   ======================================== */
+.navbar__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px 10px;
+    position: relative;
+    z-index: 21;
+    transition: all var(--transition);
+}
+
+.navbar__toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar__toggle span {
+    width: 22px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+    transform-origin: center;
+}
+
+.navbar__toggle.is-active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.navbar__toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar__toggle.is-active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-image: url('images/hero-foot-insole.webp');
+    background-size: cover;
+    background-position: 78% center;
+    background-repeat: no-repeat;
+    padding-bottom: 40px;
+}
+
+.hero__inner {
+    width: 100%;
+    max-width: var(--wrap);
+    margin: 120px auto auto;
+    padding: 0 32px;
+}
+
+.hero h1 {
+    font-family: 'Manrope', sans-serif;
+    color: #ffffff;
+    font-size: clamp(26px, 3.8vw, 54px);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    max-width: 680px;
+}
+
+.hero__white {
+    color: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.hero__pink {
+    color: var(--pink);
+    display: inline-block;
+}
+
+.hero__subtitle {
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 600;
+    line-height: 1.5;
+    color: #ffffff;
+    max-width: 580px;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 34px;
+    background: var(--pink);
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 50px;
+    transition: all var(--transition);
+    box-shadow: 0 8px 20px rgba(236, 23, 82, 0.3);
+}
+
+.hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(236, 23, 82, 0.4);
+    background: #d4144a;
+}
+
+/* ========================================
+   CATEGORIES
+   ======================================== */
+.categories {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 28px;
+    padding: 0;
+    overflow: visible;
+    z-index: 5;
+    background: transparent;
+}
+
+.categories__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 28px;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 32px;
+    align-items: stretch;
+}
+
+/* ========================================
+   CARDS - ОСНОВНИ
+   ======================================== */
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 20px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+    min-height: 150px;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow-hover);
+}
+
+.card:hover h4 {
+    color: var(--ink);
+}
+
+.card__icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(236, 23, 82, 0.2);
+    flex-shrink: 0;
+}
+
+.card__icon img {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.card h4 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    transition: color var(--transition);
+}
+
+.card__link {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap var(--transition);
+}
+
+.card:hover .card__link {
+    gap: 12px;
+}
+
+/* ========================================
+   SPORT CARD - SPECIAL STYLING
+   ======================================== */
+.card--sport {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    min-height: 260px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    overflow: visible;
+    cursor: pointer;
+}
+
+.card--sport::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(236, 23, 82, 0.2), transparent 50%, rgba(236, 23, 82, 0.05));
+    z-index: -1;
+    filter: blur(2px);
+    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card--sport .card__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.card--sport .card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px) brightness(0.7);
+    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform: scale(1);
+}
+
+.card--sport:hover .card__image img {
+    filter: blur(0px) brightness(0.6);
+    transform: scale(1.25);
+}
+
+.card--sport .card__overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.card--sport .card__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: rgba(236, 23, 82, 0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.card--sport .card__icon img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+}
+
+.card--sport h4 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.card--sport .card__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pink);
+    background: rgba(255, 255, 255, 0.92);
+    padding: 6px 18px 6px 14px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card--sport:hover .card__link {
+    gap: 14px;
+    background: #ffffff;
+    box-shadow: 0 6px 25px rgba(236, 23, 82, 0.3);
+    transform: translateY(-2px);
+}
+
+.card--sport:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.card--sport:hover::after {
+    filter: blur(4px);
+    transform: scale(1.02);
+    background: linear-gradient(135deg, rgba(236, 23, 82, 0.3), transparent 50%, rgba(236, 23, 82, 0.08));
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+    background: var(--ink);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 40px 20px 30px;
+}
+
+.footer__inner {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer__brand p {
+    font-size: 14px;
+}
+
+.footer__links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.footer__links a {
+    font-size: 14px;
+    transition: color var(--transition);
+}
+
+.footer__links a:hover {
+    color: var(--pink);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1200px) {
+    .categories__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .categories {
+        position: relative;
+        bottom: auto;
+        margin-top: 24px;
+        padding: 0 0 8px;
+    }
+    .categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero__inner {
+        margin: 100px auto 0;
+    }
+}
+
+@media (max-width: 860px) {
+    .hero {
+        background-size: 150% auto;
+        background-position: center top;
+        min-height: auto;
+    }
+
+    .navbar {
+        padding: 16px 16px 0;
+    }
+
+    .navbar__inner {
+        padding: 4px 0;
+    }
+
+    .navbar__links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: auto;
+        right: 0;
+        width: min(100%, 320px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 14px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height var(--transition), opacity var(--transition), padding var(--transition), transform var(--transition);
+        transform: translateY(-6px);
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        z-index: 25;
+        isolation: isolate;
+    }
+
+    .navbar__links.is-open {
+        max-height: 320px;
+        padding: 18px 14px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .navbar__links a {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 14px;
+        color: #ffffff;
+        text-shadow: none;
+    }
+
+    .navbar__links a::after {
+        display: none;
+    }
+
+    .navbar__links a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: var(--pink);
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+
+    .hero__inner {
+        margin: 90px auto 0;
+        padding: 0 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(28px, 9.2vw, 40px);
+        margin-bottom: 12px;
+        max-width: 100%;
+        color: #ffffff;
+    }
+
+    .hero__pink {
+        color: var(--pink);
+    }
+
+    .hero__subtitle {
+        font-size: clamp(15px, 4.8vw, 18px);
+        max-width: 100%;
+        white-space: normal;
+        color: #ffffff;
+    }
+
+    .hero__cta {
+        padding: 12px 28px;
+        font-size: 15px;
+    }
+
+    .categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        padding: 0 20px;
+        margin: 0 auto;
+    }
+
+    .card {
+        padding: 18px 16px;
+        min-height: 0;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .card h4 {
+        font-size: 16px;
+        color: #ffffff;
+    }
+
+    .card__icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .card--sport {
+        min-height: 200px;
+        padding: 18px 16px;
+    }
+    .card--sport .card__icon {
+        width: 46px;
+        height: 46px;
+    }
+    .card--sport .card__icon img {
+        width: 24px;
+        height: 24px;
+    }
+    .card--sport h4 {
+        font-size: 16px;
+    }
+    .card--sport .card__link {
+        font-size: 12px;
+        padding: 5px 14px 5px 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        background-size: 190% auto;
+        background-position: 62% top;
+    }
+    .categories__grid {
+        grid-template-columns: 1fr;
+    }
+    .footer__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer__links {
+        justify-content: center;
+    }
+
+    .card--sport {
+        min-height: 180px;
+        padding: 14px 14px;
+        border-radius: 18px;
+    }
+    .card--sport .card__icon {
+        width: 40px;
+        height: 40px;
+    }
+    .card--sport .card__icon img {
+        width: 20px;
+        height: 20px;
+    }
+    .card--sport h4 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding-bottom: 16px;
+    }
+    .hero__inner {
+        margin-top: 80px;
+    }
+    .navbar__inner {
+        margin-top: 0;
+    }
+    .hero h1 {
+        font-size: clamp(24px, 8vw, 32px);
+    }
+    .card__link {
+        font-size: 13px;
+    }
+    .hero__cta {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   ANIMATIONS (AOS overwrite)
+   ======================================== */
+[data-aos] {
+    opacity: 0;
+    transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+/* ========================================
+   PAGE LOAD ANIMATION
+   ======================================== */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
