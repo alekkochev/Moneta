@@ -89,12 +89,10 @@ if (window.gsap && window.ScrollTrigger) {
 
         ScrollTrigger.create({
             trigger: card,
-            start: 'top 75%',
-            end: 'bottom 35%',
-            onEnter: () => card.classList.add('is-active'),
-            onEnterBack: () => card.classList.add('is-active'),
-            onLeave: () => card.classList.remove('is-active'),
-            onLeaveBack: () => card.classList.remove('is-active')
+            start: 'top 60%',
+            end: 'bottom 40%',
+            toggleClass: { targets: card, className: 'is-active' },
+            scrub: false
         });
     });
 }
