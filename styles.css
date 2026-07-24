@@ -157,7 +157,7 @@ a {
 }
 
 .hero__inner {
-    max-width: var(--wrap);
+    max-width: 560px;
     margin: 120px auto 0;
     padding: 0 32px;
     width: 100%;
@@ -168,7 +168,7 @@ a {
     font-size: clamp(32px, 4.5vw, 60px);
     font-weight: 800;
     line-height: 1.15;
-    max-width: 700px;
+    max-width: 520px;
     margin-bottom: 20px;
 }
 
@@ -188,11 +188,11 @@ a {
 .hero__subtitle-dark {
     font-size: clamp(20px, 2.2vw, 28px);
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(183, 15, 74, 0.95);
     max-width: 600px;
-    margin-bottom: 24px;
+    margin: 60px 0 24px;
     line-height: 1.4;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
 }
 
 /* --- TRUST BADGES --- */
@@ -230,6 +230,7 @@ a {
     transition: all var(--transition);
     box-shadow: 0 8px 28px rgba(236, 23, 82, 0.35);
     letter-spacing: 0.01em;
+    margin-left: auto;
 }
 
 .hero__cta:hover {
@@ -415,6 +416,20 @@ a {
     width: 28px;
     height: 28px;
     filter: brightness(0) invert(1);
+}
+
+.card.is-active .card__image img {
+    filter: blur(0px) brightness(0.9);
+    transform: scale(1.03);
+}
+
+.card.is-active .card__icon::after {
+    opacity: 1;
+    transform: scale(1.12);
+}
+
+.card:not(.is-active) .card__icon::after {
+    opacity: 0;
 }
 
 .card--sport h4,
