@@ -1,160 +1,400 @@
 ﻿<!DOCTYPE html>
 <html lang="mk">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MONETA — Анатомски вложки</title>
-    <meta name="description" content="MONETA анатомски вложки – подобар чекор, помал замор и поголема удобност." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONETA — Анатомски вложки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#EC1752;
+    --pink-soft:rgba(236,23,82,.35);
+    --pink-wash:rgba(236,23,82,.08);
+    --ink:#201F26;
+    --muted:#6B6B76;
+    --bg:#F7F6F5;
+    --radius:20px;
+    --wrap:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Manrope',sans-serif;}
+  img{display:block;max-width:100%;height:auto;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px;}
+
+  /* ---------- NAVBAR (Normal flow on first screen, scrolls away) ---------- */
+  .navbar{
+    width: 100%;
+    background: transparent;
+    position: relative;
+    z-index: 10;
+  }
+  .navbar__inner{
+    max-width: var(--wrap);
+    margin: 20px auto 0;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(32, 31, 38, 0.08);
+  }
+  .navbar__logo img{height:30px;width:auto;}
+  .navbar__links{display:flex;align-items:center;gap:40px;list-style:none;}
+  .navbar__links a{
+    font-size:15px;font-weight:500;color:var(--ink);
+    position:relative;padding:6px 0;
+    line-height:1.4;
+    transition:color .2s ease;
+  }
+  .navbar__links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:2px;
+    background:var(--pink);transition:width .25s ease;
+  }
+  .navbar__links a:hover{color:var(--pink);}
+  .navbar__links a:hover::after{width:100%;}
+  .navbar__toggle{
+    display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;
+  }
+  .navbar__toggle span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease, opacity .25s ease;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    background-image:url('images/hero-foot-insole.webp');
+    background-size:cover;
+    background-position:78% center;
+    background-repeat:no-repeat;
+  }
+  .hero__inner{
+    width:100%;
+    max-width:var(--wrap);
+    margin: 90px auto auto;
+    padding: 0 32px;
+  }
+  .hero h1{
+    color:var(--pink);
+    font-size:clamp(34px, 4.2vw, 54px);
+    font-weight:800;
+    line-height:1.18;
+    letter-spacing:-.01em;
+    margin-bottom:16px;
+    max-width:680px;
+  }
+  .hero h2{
+    color:var(--ink);
+    font-size:clamp(16px, 1.6vw, 20px);
+    font-weight:600;
+    line-height:1.5;
+    font-family:'Inter',sans-serif;
+  }
+  @media (min-width: 861px){
+    .hero h2{white-space:nowrap;}
+  }
+
+  /* ---------- CATEGORIES ---------- */
+  .categories{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:28px;
+    padding:0;
+    overflow:visible;
+    z-index:5;
+    background:transparent;
+  }
+  .categories__head{
+    display:none;
+  }
+  .categories__eyebrow{
+    display:inline-block;
+    font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--pink);margin-bottom:14px;
+  }
+  .categories__head h3{
+    font-size:clamp(24px,2.6vw,32px);
+    font-weight:700;
+    color:var(--ink);
+  }
+  .categories__grid{
+    display:grid;
+    grid-template-columns:repeat(6, minmax(0, 1fr));
+    gap:28px;
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 32px;
+    align-items:stretch;
+  }
+  .card{
+    display:flex;flex-direction:column;align-items:flex-start;gap:16px;
+    padding:22px 20px;
+    border-radius:22px;
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    border:1px solid rgba(255,255,255,.45);
+    box-shadow:0 8px 24px rgba(32,31,38,.08);
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease;
+    min-height:150px;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.65);
+    box-shadow:0 20px 40px rgba(236,23,82,.14);
+  }
+  .card__icon{
+    width:46px;height:46px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:14px;
+    background:rgba(236,23,82,.1);
+  }
+  .card__icon svg{width:26px;height:26px;stroke:var(--pink);}
+  .card h4{
+    font-family:'Manrope',sans-serif;
+    font-size:17px;font-weight:700;color:var(--ink);
+  }
+  .card__link{
+    margin-top:auto;padding-top:8px;
+    font-size:14px;font-weight:600;color:var(--pink);
+    display:flex;align-items:center;gap:6px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1200px){
+    .categories__grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:900px){
+    .categories{
+      position:relative;
+      bottom:auto;
+      margin-top:24px;
+      padding:0 0 8px;
+    }
+    .categories__grid{grid-template-columns:repeat(2,1fr);}
+    .hero__inner{margin: 64px auto 0;}
+  }
+  @media (max-width:860px){
+    .navbar__inner{
+      margin: 16px auto 0;
+      padding: 12px 18px;
+      position:relative;
+    }
+    .navbar__links{
+      position:absolute;
+      top:calc(100% + 10px);
+      left:auto;
+      right:0;
+      width:min(100%, 320px);
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:0 14px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      pointer-events:none;
+      transition:max-height .3s ease, opacity .25s ease, padding .3s ease, transform .25s ease;
+      transform:translateY(-6px);
+      background:#9A9A9A;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.34);
+      border-radius:20px;
+      box-shadow:0 20px 40px rgba(32,31,38,.12);
+      z-index:25;
+      isolation:isolate;
+    }
+    .navbar__links::before{
+      content:'m';
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      font-family:'Manrope',sans-serif;
+      font-size:clamp(76px, 20vw, 120px);
+      font-weight:800;
+      line-height:1;
+      letter-spacing:-.08em;
+      color:rgba(236,23,82,.10);
+      pointer-events:none;
+      z-index:-1;
+    }
+    .navbar__links.is-open{
+      max-height:320px;
+      padding:18px 14px;
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+    .navbar__links a{
+      width:100%;
+      max-width:280px;
+      padding:12px 20px;
+      text-align:center;
+      font-size:16px;
+      border-radius:14px;
+    }
+    .navbar__links a::after{display:none;}
+    .navbar__links a:hover{background:rgba(255,255,255,.30);}
+    .navbar__toggle{display:flex;position:relative;z-index:21;}
+
+    .hero{
+      min-height:auto;
+      background-size:cover;
+      background-position:center center;
+      padding-bottom:20px;
+    }
+    .hero__inner{
+      margin: 70px auto 0;
+      padding: 0 20px;
+    }
+    .hero h1{
+      font-size:clamp(28px, 9.2vw, 40px);
+      margin-bottom:12px;
+      max-width:100%;
+    }
+    .hero h2{
+      font-size:clamp(15px, 4.8vw, 18px);
+      max-width:100%;
+    }
+    .categories__grid{grid-template-columns:repeat(2,1fr);gap:18px;padding:0 20px; margin:0 auto;}
+    .card{padding:18px 16px;min-height:0;border-radius:18px;}
+    .card h4{font-size:16px;}
+    .card__icon{width:42px;height:42px;}
+  }
+  @media (max-width:560px){
+    .hero{
+      background-size:cover;
+      background-position:62% center;
+    }
+    .categories__grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .hero{padding-bottom:16px;}
+    .hero__inner{margin-top:58px;}
+    .navbar__inner{margin-top:12px;}
+    .hero h1{font-size:clamp(24px, 8vw, 32px);}
+    .card__link{font-size:13px;}
+  }
+</style>
 </head>
 <body>
 
-    <!-- ===== NAVBAR ===== -->
+  <section class="hero">
     <header class="navbar">
-        <div class="navbar__inner">
-            <a href="/" class="navbar__logo">
-                <img src="images/moneta-logo.svg" alt="MONETA" width="120" height="34">
-            </a>
-            <ul class="navbar__links" id="navLinks">
-                <li><a href="/produkti/">Влошки</a></li>
-                <li><a href="/informacii/">Информации</a></li>
-                <li><a href="/sistem/">MONETA Систем</a></li>
-                <li><a href="/kontakt/">Контакт</a></li>
-            </ul>
-            <button class="navbar__toggle" id="navToggle" aria-label="Мени">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+      <div class="navbar__inner">
+        <a href="#" class="navbar__logo"><img src="images/moneta-logo.svg" alt="MONETA лого"></a>
+        <ul class="navbar__links" id="navLinks">
+          <li><a href="#">Влошки</a></li>
+          <li><a href="#">Информации</a></li>
+          <li><a href="#">MONETA Систем</a></li>
+          <li><a href="#">Контакт</a></li>
+        </ul>
+        <button class="navbar__toggle" id="navToggle" aria-label="Отвори мени" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-        <div class="hero__inner">
-            <h1 data-aos="fade-up">
-                <span class="hero__white">РЕШЕНИЕ ЗА ПОДОБАР ЧЕКОР,</span><br>
-                <span class="hero__pink">ПОМАЛ ЗАМОР И ПОГОЛЕМА УДОБНОСТ</span>
-            </h1>
+    <div class="hero__inner">
+      <h1>Решение за подобар чекор, помал замор и поголема удобност во секојдневниот живот.</h1>
+      
+    </div>
+
+    <div class="categories">
+      <div class="categories__head">
+        <span class="categories__eyebrow">MONETA вложки</span>
+        <h3>Изберете ја вашата категорија</h3>
+      </div>
+
+      <div class="categories__grid">
+
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c1-4 3-6 6-6h2c2 0 3-1.2 3.5-3 .3-1 1-1.5 2-1.3 1 .2 1.5 1.1 1.2 2.1-.3 1-.2 1.7.6 2.2 1.6 1 3.2 2.6 3.7 5H3Z"/><path d="M3 17h18v2a2 2 0 0 1-2 2H6a3 3 0 0 1-3-3v-1Z"/></svg>
         </div>
-        <p class="hero__subtitle-dark hero__subtitle-bottom" data-aos="fade-up" data-aos-delay="150">
-            Престанете со болката во стапалата – анатомски влошки за секојдневно движење
-        </p>
-    </section>
+        <h4>Спортски влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
 
-    <!-- ===== CATEGORIES ===== -->
-    <section class="categories-section">
-        <div class="categories__grid">
-
-            <!-- 1. Спортски -->
-            <a href="/produkti/sportski/" class="card card--sport" data-aos="fade-up" data-aos-delay="50">
-                <div class="card__image">
-                    <img src="images/cards/Sportski.webp" alt="Спортски влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/sport.svg" alt="Спорт" width="26" height="26">
-                    </div>
-                    <h4>Спортски влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
-            <!-- 2. Кожни -->
-            <a href="/produkti/kozhni/" class="card card--image" data-aos="fade-up" data-aos-delay="100">
-                <div class="card__image">
-                    <img src="images/cards/Kozni.webp" alt="Кожни влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/leather.svg" alt="Кожни" width="26" height="26">
-                    </div>
-                    <h4>Кожни влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
-            <!-- 3. Летни -->
-            <a href="/produkti/letni/" class="card card--image" data-aos="fade-up" data-aos-delay="150">
-                <div class="card__image">
-                    <img src="images/cards/Letni.webp" alt="Летни влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/summer.svg" alt="Летни" width="26" height="26">
-                    </div>
-                    <h4>Летни влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
-            <!-- 4. Зимски -->
-            <a href="/produkti/zimski/" class="card card--image" data-aos="fade-up" data-aos-delay="200">
-                <div class="card__image">
-                    <img src="images/cards/thermo_alu.webp" alt="Зимски влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/winter.svg" alt="Зимски" width="26" height="26">
-                    </div>
-                    <h4>Зимски влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
-            <!-- 5. HUNTER -->
-            <a href="/produkti/hunter/" class="card card--image" data-aos="fade-up" data-aos-delay="250">
-                <div class="card__image">
-                    <img src="images/cards/HUNTER vloski.webp" alt="HUNTER влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/hunter.svg" alt="HUNTER" width="26" height="26">
-                    </div>
-                    <h4>HUNTER влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
-            <!-- 6. Детски -->
-            <a href="/produkti/detski/" class="card card--image" data-aos="fade-up" data-aos-delay="300">
-                <div class="card__image">
-                    <img src="images/cards/detski.webp" alt="Детски влошки" loading="lazy">
-                </div>
-                <div class="card__overlay">
-                    <div class="card__icon">
-                        <img src="images/icons/kids.svg" alt="Детски" width="26" height="26">
-                    </div>
-                    <h4>Детски влошки</h4>
-                    <span class="card__link">Погледни →</span>
-                </div>
-            </a>
-
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V9c0-1.7 1.3-3 3-3h2l2-2 2 2h2c1.7 0 3 1.3 3 3v11"/><path d="M4 20h16"/><path d="M8 13h8"/><path d="M8 16.5h8"/></svg>
         </div>
-    </section>
+        <h4>Кожни влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="footer__inner">
-            <div class="footer__brand">
-                <img src="images/moneta-logo.svg" alt="MONETA" width="100" height="28">
-                <p>&copy; 2026 MONETA. Сите права задржани.</p>
-            </div>
-            <ul class="footer__links">
-                <li><a href="/za-nas/">За нас</a></li>
-                <li><a href="/kontakt/">Контакт</a></li>
-                <li><a href="/uslovi/">Услови</a></li>
-                <li><a href="/privatnost/">Приватност</a></li>
-            </ul>
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"/></svg>
         </div>
-    </footer>
+        <h4>Летни влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+wyCyo7u4vL+uOQHD6b+vWUwL08m0yyxTD5eVq74uV3OE36Q0K3sB2yMZJUo6tH+u8SXq+GjZlARHzI6alAzUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Hl5SJd4bBm+7MxT7f1VP+h9wbH/j4wGz2N6DWM+hBweY2vgu8c5eH0tHYRzab8m8NE6C9odhM6uT8S6E3KgnRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script.js"></script>
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M12 3l-2 2m2-2 2 2M12 21l-2-2m2 2 2-2M4.2 7.5l2.6-.4m-2.6.4-.7-2.5M19.8 16.5l-2.6.4m2.6-.4.7 2.5M4.2 16.5l2.6.4m-2.6-.4-.7 2.5M19.8 7.5l-2.6-.4m2.6.4.7-2.5"/></svg>
+        </div>
+        <h4>Зимски влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 3 5 6.2 5 9.4A5 5 0 0 1 7 11.4C7 8.2 9 5 12 2Z"/><path d="M12 13v9M9 22h6"/></svg>
+        </div>
+        <h4>HUNTER влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
+
+      <a href="#" class="card">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.2 4.6 5 .7-3.6 3.6.9 5.1L12 14.6l-4.5 2.4.9-5-3.6-3.7 5-.7L12 3Z"/></svg>
+        </div>
+        <h4>Детски влошки</h4>
+        <span class="card__link">Погледни →</span>
+      </a>
+
+    </div>
+  </section>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    links.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
 </html>
