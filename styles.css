@@ -554,8 +554,8 @@ a {
         flex-direction: column;
         position: absolute;
         top: calc(100% + 10px);
-        right: 0;
-        width: 320px;
+        right: 10px;
+        width: min(100%, 320px);
         background: rgba(0, 0, 0, 0.75);
         backdrop-filter: blur(14px);
         border-radius: 20px;
@@ -571,9 +571,12 @@ a {
         color: #ffffff;
         text-shadow: none;
         text-align: center;
-        padding: 12px 20px;
+        padding: 12px 16px;
         border-radius: 14px;
         width: 100%;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
     }
     .navbar__links a::after {
         display: none;
@@ -596,22 +599,27 @@ a {
         padding: 0 20px;
     }
 
-    .card--sport {
-        min-height: 200px;
+    .card--sport,
+    .card--image {
+        min-height: 220px;
     }
-    .card--sport .card__overlay {
-        min-height: 200px;
+    .card--sport .card__overlay,
+    .card--image .card__overlay {
+        min-height: 220px;
         padding: 18px 16px;
     }
-    .card--sport .card__icon {
+    .card--sport .card__icon,
+    .card--image .card__icon {
         width: 46px;
         height: 46px;
     }
-    .card--sport .card__icon img {
+    .card--sport .card__icon img,
+    .card--image .card__icon img {
         width: 24px;
         height: 24px;
     }
-    .card--sport h4 {
+    .card--sport h4,
+    .card--image h4 {
         font-size: 16px;
     }
 }
@@ -640,22 +648,27 @@ a {
         grid-template-columns: 1fr;
     }
 
-    .card--sport {
+    .card--sport,
+    .card--image {
         min-height: 180px;
     }
-    .card--sport .card__overlay {
+    .card--sport .card__overlay,
+    .card--image .card__overlay {
         min-height: 180px;
         padding: 14px;
     }
-    .card--sport .card__icon {
+    .card--sport .card__icon,
+    .card--image .card__icon {
         width: 40px;
         height: 40px;
     }
-    .card--sport .card__icon img {
+    .card--sport .card__icon img,
+    .card--image .card__icon img {
         width: 20px;
         height: 20px;
     }
-    .card--sport h4 {
+    .card--sport h4,
+    .card--image h4 {
         font-size: 15px;
     }
 
