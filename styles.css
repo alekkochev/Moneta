@@ -681,6 +681,23 @@ a {
     }
 }
 
+@media (hover: none) {
+    .card--sport .card__image img,
+    .card--image .card__image img {
+        filter: blur(16px) brightness(0.67);
+    }
+    .card--sport .card__overlay,
+    .card--image .card__overlay {
+        padding: 70px 16px 18px;
+    }
+    .card--sport .card__link,
+    .card--image .card__link {
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
 /* ========================================
    ANIMATIONS
    ======================================== */
