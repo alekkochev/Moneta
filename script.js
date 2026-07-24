@@ -80,6 +80,47 @@ if (window.gsap && window.ScrollTrigger) {
         duration: 0.8,
         ease: 'power3.out'
     });
+
+    const imageCards = document.querySelectorAll('.categories__grid .card--image, .categories__grid .card--sport');
+
+    imageCards.forEach((card) => {
+        const image = card.querySelector('.card__image img');
+        const icon = card.querySelector('.card__icon');
+
+        if (!image || !icon) return;
+
+        gsap.fromTo(image, {
+            filter: 'blur(22px) brightness(0.55)',
+            scale: 1
+        }, {
+            filter: 'blur(0px) brightness(0.85)',
+            scale: 1.06,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                end: 'top 40%',
+                scrub: 0.8,
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        gsap.fromTo(icon, {
+            boxShadow: '0 0 0 rgba(236, 23, 82, 0)',
+            scale: 1
+        }, {
+            boxShadow: '0 0 25px rgba(236, 23, 82, 0.55), 0 0 40px rgba(236, 23, 82, 0.25)',
+            scale: 1.03,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                end: 'top 50%',
+                scrub: 0.8,
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
 }
 
 // ========================================
